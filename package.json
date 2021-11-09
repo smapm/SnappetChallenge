@@ -1,0 +1,19 @@
+{
+  "name": "snappetchallenge",
+  "version": "1.0.0",
+  "description": "Snappet front end coding challenge with React",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smapm/SnappetChallenge.git"
+  },
+  "author": "sarath",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/smapm/SnappetChallenge/issues"
+  },
+  "homepage": "https://github.com/smapm/SnappetChallenge#readme"
+}
