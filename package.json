@@ -4,7 +4,9 @@
   "description": "Snappet front end coding challenge with React",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "webpack serve --open",
+    "eslint": "eslint src --ext js,jsx",
+    "eslint-fix": "eslint src --ext js,jsx --fix"
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,29 @@
   "bugs": {
     "url": "https://github.com/smapm/SnappetChallenge/issues"
   },
-  "homepage": "https://github.com/smapm/SnappetChallenge#readme"
+  "homepage": "https://github.com/smapm/SnappetChallenge#readme",
+  "dependencies": {
+    "@babel/runtime": "^7.16.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "react-router": "^6.0.1",
+    "react-router-dom": "^6.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/plugin-transform-runtime": "^7.16.0",
+    "@babel/preset-env": "^7.16.0",
+    "@babel/preset-react": "^7.16.0",
+    "babel-loader": "^8.2.3",
+    "css-loader": "^6.5.1",
+    "eslint": "^8.2.0",
+    "eslint-plugin-react": "^7.26.1",
+    "node-sass": "^6.0.1",
+    "sass-loader": "^12.3.0",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.62.2",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.4.0"
+  }
 }
