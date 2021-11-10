@@ -1,0 +1,8 @@
+@import '../abstracts/';
+.table {
+  margin-bottom: 2rem;
+  max-width: 600px;
+  @include breakpoint(desktop) {
+    min-width: 300px;
+  }
+}
