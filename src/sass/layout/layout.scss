@@ -1,0 +1,11 @@
+@import '../abstracts/';
+.layout {
+  &__container {
+    padding: 1rem;
+    margin-left: 3.5rem;
+    @include breakpoint(desktop) {
+      padding: 2rem;
+      margin-left: 7rem;
+    }
+  }
+}

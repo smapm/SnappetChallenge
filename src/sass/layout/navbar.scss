@@ -1,0 +1,59 @@
+@import '../abstracts/';
+.navbar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  background: $navbar-background-color;
+  bottom: 0;
+  top: 0;
+  padding: 0.5rem;
+  color: $navbar-icon-color;
+  width: $nav-sm-width;
+  @include breakpoint(desktop) {
+    width: $nav-lg-width;
+  }
+  &__logo {
+    font-size: 2.5em;
+    color: $navbar-brand-color;
+    @include breakpoint(desktop) {
+      padding: 1rem;
+      font-size: 3em;
+    }
+  }
+  nav {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    ul {
+      list-style: none;
+      padding: 0;
+      li {
+        font-size: 2em;
+        padding-bottom: 1rem;
+        text-align: center;
+        text-decoration: none;
+        @include breakpoint(desktop) {
+          padding: 1rem;
+          cursor: pointer;
+        }
+        &:hover {
+          transform: scale(1.2);
+          transition: 0.4s ease;
+        }
+        span {
+          display: none;
+          @include breakpoint(desktop) {
+            display: block;
+            font-size: 0.5em;
+          }
+        }
+      }
+    }
+  }
+  &__active {
+    color: $navbar-icon-hover;
+  }
+}
