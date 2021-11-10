@@ -4,7 +4,7 @@
   "description": "Snappet front end coding challenge with React",
   "main": "index.js",
   "scripts": {
-    "start": "webpack serve --open",
+    "start": "webpack serve --open --node-env=LOCAL",
     "eslint": "eslint src --ext js,jsx",
     "eslint-fix": "eslint src --ext js,jsx --fix"
   },
