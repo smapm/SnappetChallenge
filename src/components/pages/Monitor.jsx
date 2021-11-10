@@ -1,107 +1,89 @@
 import React, { Component, Fragment } from 'react';
-import { uniqBy, filter } from 'lodash';
-import { DateTime } from 'luxon';
+import {connect} from 'react-redux';
+import {retrieveStudentData} from '../../store/actions/actionCreator';
 import BasicTable from '../common/Table';
-import dataJson from '../../work.json';
 import Dropdown from '../common/Dropdown';
 import classes from '../../sass/pages/monitor.scss';
+import PropTypes from 'prop-types';
 class Monitor extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      studentsList: [],
-      learningObjective: [],
-      subject: [],
-      domain: [],
-      dates: [],
       selectedDate: '2015-03-24'
     };
   }
 
   componentDidMount() {
-    let dateList = [];
-    const dataset = filter(dataJson, function (o) {
-      const slice = DateTime.fromISO('2015-03-24T11:30:00.000').diff(DateTime.fromISO(o.SubmitDateTime.trim()));
-      const flag = slice.values.milliseconds >= 0;
-      flag && dateList.push(o.SubmitDateTime.split('T')[0]);
-      if (flag && o.SubmitDateTime.includes('2015-03-24')) {
-        return true;
-      }
-      return false;
-    });
-    const studentsList = this.extractDataHelper(uniqBy(dataset, 'UserId'), 'UserId');
-    const learningObjective = this.extractDataHelper(uniqBy(dataset, 'LearningObjective'), 'LearningObjective');
-    const subject = this.extractDataHelper(uniqBy(dataset, 'Subject'), 'Subject');
-    const domain = this.extractDataHelper(uniqBy(dataset, 'Domain'), 'Domain');
-    //const exerciseId = this.extractDataHelper(uniqBy(dataset, 'ExerciseId'), 'ExerciseId');
-    const dates = [...new Set(dateList)];
-    this.setState({
-      studentsList,
-      learningObjective,
-      subject,
-      domain,
-      dateList: dates
-    });
-  }
-
-  extractDataHelper(data, propertyName) {
-    let output = [];
-    for (let i in data) {
-      output.push(data[i][propertyName]);
-    }
-    return output;
+    this.props.retrieveStudentData(this.state.selectedDate);
   }
 
   setSelectedDate = (date) => {
-    const dataset = filter(dataJson, function (o) {
-      const slice = DateTime.fromISO('2015-03-24T11:30:00.000').diff(DateTime.fromISO(o.SubmitDateTime.trim()));
-      const flag = slice.values.milliseconds >= 0;
-      if (flag && o.SubmitDateTime.includes(date)) {
-        return true;
-      }
-      return false;
-    });
-    const studentsList = this.extractDataHelper(uniqBy(dataset, 'UserId'), 'UserId');
-    const learningObjective = this.extractDataHelper(uniqBy(dataset, 'LearningObjective'), 'LearningObjective');
-    const subject = this.extractDataHelper(uniqBy(dataset, 'Subject'), 'Subject');
-    const domain = this.extractDataHelper(uniqBy(dataset, 'Domain'), 'Domain');
-    //const exerciseId = this.extractDataHelper(uniqBy(dataset, 'ExerciseId'), 'ExerciseId');
+    this.props.retrieveStudentData(date);
     this.setState({
-      studentsList,
-      learningObjective,
-      subject,
-      domain,
       selectedDate: date
     });
   };
 
   render() {
+    if(this.props.networkError){
+      return <h1>Something went wrong... We are fixing it on priority.</h1>;
+    }
+    if(!this.props.dateList.length){
+      return null;
+    }
     return (
       <Fragment>
         <h2 className={classes.heading}>Teachers Dashboard</h2>
         <div className={classes.datepick}>
           <Dropdown
-            dates={this.state.dateList}
+            dates={this.props.dateList}
             selectedDate={this.state.selectedDate}
             setSelectedDate={this.setSelectedDate}/>
         </div>       
         <div className={classes.monitor}>
           <BasicTable
-            dataList={this.state.studentsList}
+            dataList={this.props.studentsList}
             headerName='Student ID' />
           <BasicTable
-            dataList={this.state.learningObjective}
+            dataList={this.props.learningObjective}
             headerName='Learning Objectives' />
           <BasicTable
-            dataList={this.state.subject}
+            dataList={this.props.subject}
             headerName='Subjects' />
           <BasicTable
-            dataList={this.state.domain}
+            dataList={this.props.domain}
             headerName='Domain' />
         </div>
       </Fragment>);
   }
 }
 
-export default Monitor;
+const mapStateToProps = state => {
+  return {
+    dateList: state.dateList,
+    studentsList: state.studentsList,
+    learningObjective: state.learningObjective,
+    subject: state.subject,
+    domain: state.domain,
+    networkError: state.networkError
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    retrieveStudentData: (utctime) => dispatch(retrieveStudentData(utctime))
+  };
+};
+
+Monitor.propTypes = {
+  retrieveStudentData: PropTypes.func.isRequired,
+  networkError: PropTypes.bool.isRequired,
+  dateList: PropTypes.array.isRequired,
+  studentsList: PropTypes.array.isRequired,
+  learningObjective: PropTypes.array.isRequired,
+  subject: PropTypes.array.isRequired,
+  domain: PropTypes.array.isRequired,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Monitor);
