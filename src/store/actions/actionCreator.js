@@ -3,7 +3,7 @@ import { DateTime } from 'luxon';
 export const retrieveStudentData = (utcTime) => {
   return async (dispatch) => {
     try {
-      const response = await fetch('https://run.mocky.io/v3/f6492c63-90e5-421c-98d2-5cd74cfb0684', {
+      const response = await fetch('https://run.mocky.io/v3/d652edfd-e4d2-4d4a-9322-ccd3fcac85ae', {
         'method': 'GET',
       });
       const studentData = await response.json();
@@ -26,10 +26,37 @@ export const retrieveStudentData = (utcTime) => {
           domain[current.Domain] = current.Domain;
         }
       }
-      dispatch({ type: 'ADD_STUDENT_DATA', data: {dateList: [...new Set(dateList)], studentsList, learningObjective, subject, domain} });
+      dispatch({ type: 'ADD_STUDENT_DATA', data: {dateList: [...new Set(dateList)], studentsList, learningObjective, subject, domain, dataSet} });
     } catch (e) {
       console.log(e);
       dispatch({ type: 'NETWORK_ERRROR'});
     }
+  };
+};
+
+export const showStudentResults = (studentID) => {
+  return async (dispatch, getState) => {
+    const { dataSet = [] } = getState();
+    let subject = {};
+    for(let i in dataSet) {
+      let current = dataSet[i];
+      const flag = current.UserId === +studentID;
+      if( flag && [current.Subject] in subject) {
+        let subjectCopy = Object.assign({}, subject[current.Subject]);
+        subjectCopy.totalExercise = subjectCopy.totalExercise + 1;
+        subjectCopy.correct = subjectCopy.correct + current.Correct;
+        subjectCopy.incorrect = subjectCopy.totalExercise - subjectCopy.correct;
+        subject[current.Subject] = subjectCopy;
+      }
+      else if (flag ) {
+        subject[current.Subject] = {
+          totalExercise: 1,
+          correct: current.Correct,
+          subject: current.Subject,
+          incorrect: 0
+        };
+      }
+    } 
+    dispatch({ type: 'SHOW_RESULT', data: {subject}});     
   };
 };

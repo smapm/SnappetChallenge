@@ -10,15 +10,15 @@ const BasicSelect = (props) => {
   return (
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Date</InputLabel>
+        <InputLabel id="demo-simple-select-label">{props.label}</InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={props.selectedDate}
-          label="Date"
-          onChange={(e) => props.setSelectedDate(e.target.value)}
+          value={props.selectedValue}
+          label={props.label}
+          onChange={(e) => props.onClickHandler(e.target.value)}
         >
-          {props.dates && props.dates.map((val) => <MenuItem key={val} value={val}>{val}</MenuItem>)}
+          {props.list && props.list.map((val) => <MenuItem key={val} value={val}>{val}</MenuItem>)}
         </Select>
       </FormControl>
     </Box>
@@ -26,9 +26,10 @@ const BasicSelect = (props) => {
 };
 
 BasicSelect.propTypes = {
-  selectedDate: PropTypes.string.isRequired,
-  setSelectedDate: PropTypes.func.isRequired,
-  dates: PropTypes.array
+  label: PropTypes.string.isRequired,
+  selectedValue: PropTypes.string.isRequired,
+  onClickHandler: PropTypes.func.isRequired,
+  list: PropTypes.array
 };
 
 export default BasicSelect;

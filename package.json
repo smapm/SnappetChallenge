@@ -20,8 +20,13 @@
   "homepage": "https://github.com/smapm/SnappetChallenge#readme",
   "dependencies": {
     "@babel/runtime": "^7.16.0",
+    "@devexpress/dx-react-chart": "^2.7.6",
+    "@devexpress/dx-react-chart-material-ui": "^2.7.6",
+    "@devexpress/dx-react-core": "^2.7.6",
     "@emotion/react": "^11.5.0",
     "@emotion/styled": "^11.3.0",
+    "@material-ui/core": "^4.12.1",
+    "@material-ui/icons": "^4.11.2",
     "@mui/material": "^5.1.0",
     "lodash": "^4.17.21",
     "luxon": "^2.1.1",

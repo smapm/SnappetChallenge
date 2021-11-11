@@ -1,0 +1,15 @@
+@import '../abstracts/';
+.results {
+  &__datepick {
+    width: 150px;
+    margin-bottom: 20px;
+    @include breakpoint(desktop) {
+      width: 250px;
+    }
+  }
+  &__chart {
+    @include breakpoint(desktop) {
+      width: 50%;
+    }
+  }
+}

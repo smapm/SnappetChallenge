@@ -37,9 +37,10 @@ class Monitor extends Component {
         <h2 className={classes.heading}>Teachers Dashboard</h2>
         <div className={classes.datepick}>
           <Dropdown
-            dates={this.props.dateList}
-            selectedDate={this.state.selectedDate}
-            setSelectedDate={this.setSelectedDate}/>
+            list={this.props.dateList}
+            selectedValue={this.state.selectedDate}
+            onClickHandler={this.setSelectedDate}
+            label='Dates'/>
         </div>       
         <div className={classes.monitor}>
           <BasicTable
