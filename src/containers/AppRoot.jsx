@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Layout from './Layout';
 import Instruct from '../components/pages/Instruct';
 import Monitor from '../components/pages/Monitor';
 import Prepare from '../components/pages/Prepare';
-import Results from '../components/pages/Results';
 import ErrorBoundary from './ErrorBoundary';
+
+const ResultsComponent = React.lazy(() => import('../components/pages/Results'));
 
 const AppRoot = () => {
   return (
@@ -22,7 +23,9 @@ const AppRoot = () => {
             <Monitor />
           </Route>
           <Route path='/results'>
-            <Results />
+            <Suspense fallback={<div>Loading Please Wait...</div>}>
+              <ResultsComponent />
+            </Suspense>
           </Route>
           <Route path='*'>
             <Prepare />
