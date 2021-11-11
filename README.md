@@ -4,6 +4,7 @@ git clone https://github.com/smapm/SnappetChallenge.git
 navigate to root directory
 then do the following:
   npm i
+  
   npm start
 
 # WHAT DOES THIS APP DO
