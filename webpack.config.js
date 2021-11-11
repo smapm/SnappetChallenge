@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
   mode: 'development',
@@ -19,6 +20,11 @@ module.exports = {
     hot: true,
     historyApiFallback: true,
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      'APP_ENV': JSON.stringify(process.env.NODE_ENV)
+    })
+  ],
   module: {
     rules: [
       {

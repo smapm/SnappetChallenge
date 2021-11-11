@@ -1,0 +1,20 @@
+@import '../abstracts/';
+.datepick {
+  width: 150px;
+  margin-bottom: 20px;
+  @include breakpoint(desktop) {
+    width: 250px;
+  }
+}
+.heading {
+  color: $navbar-icon-hover;
+  text-align: center;
+  padding: 20px;
+}
+.monitor{
+  @include breakpoint(desktop) {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+}
