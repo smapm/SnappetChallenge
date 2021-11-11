@@ -1,5 +1,11 @@
 import { DateTime } from 'luxon';
 
+// This action creator will fetch the data and then process it.
+// Results after 2015-03-24 11:30 are not considered
+// it iterates over the response once and gets all the data required
+// and dispatches to store
+// thunk is used as middleware 
+
 export const retrieveStudentData = (utcTime) => {
   return async (dispatch) => {
     try {
@@ -33,6 +39,11 @@ export const retrieveStudentData = (utcTime) => {
     }
   };
 };
+
+//this action creator will be invoked when a student is selected in results page
+// it works on the already available data in the redux store
+// this data has only info related to the date which was selected
+// this fuction gets the subject wise count of correct and incorrect answers and dispatched to store
 
 export const showStudentResults = (studentID) => {
   return async (dispatch, getState) => {
