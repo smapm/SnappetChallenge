@@ -24,7 +24,8 @@ Details like
 
 There is a RESULTS Page as well!!
 
-Here teacher has to select a student ID
+Here teacher has to select a student ID.
+
 A graph which shows the correct and incorrect answers count by the student appears for that day ( Subject wise )
 
 # LIBRARIES UESED
