@@ -9,7 +9,7 @@ import { processStudentData, processStudentResult } from '../helpers/helper';
 export const retrieveStudentData = (utcTime) => {
   return async (dispatch) => {
     try {
-      const response = await fetch('https://run.mocky.io/v3/d652edfd-e4d2-4d4a-9322-ccd3fcac85ae', {
+      const response = await fetch('https://raw.githubusercontent.com/smapm/SnappetChallenge/master/Data/work.json', {
         'method': 'GET',
       });
       const studentData = await response.json();
