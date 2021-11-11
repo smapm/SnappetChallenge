@@ -71,5 +71,6 @@ A graph which shows the correct and incorrect answers count by the student appea
 I think these can be improved
 
 Create webpack config files for deployment
+create a seperate module to handle api calls
 Increase unit test coverage
 Improve accessibility
