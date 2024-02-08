@@ -1,0 +1,11 @@
+{
+  "projectId": "klm-careers-acc",
+  "status": "success",
+  "timestamp": "2024-02-07T12:00:00Z",
+  "message": "Log entry example without color codes",
+  "data": {
+    "key1": "value1",
+    "key2": 42,
+    "key3": true
+  }
+}
